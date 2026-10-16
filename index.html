@@ -16,7 +16,7 @@
   --muted: #6a6259;
   --accent: #b85c4f;
   --white: #ffffff;
-  --gray-white: #ebe7e2;
+  --black: #000000;
   --serif-display: 'Playfair Display', Georgia, serif;
   --bodoni: 'Bodoni Moda', 'Bodoni 72', 'Didot', 'Bodoni MT', Georgia, serif;
   --serif: 'Cormorant Garamond', Georgia, serif;
@@ -38,7 +38,7 @@ img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-/* ===== FIXED BACKGROUND PHOTO ===== */
+/* ===== FIXED GLOBAL BACKGROUND (Same for all pages) ===== */
 .fixed-bg {
   position: fixed;
   inset: 0;
@@ -64,11 +64,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, 
-    rgba(255,255,255,0.25) 0%, 
-    rgba(255,255,255,0.12) 30%,
-    rgba(255,255,255,0.06) 60%,
-    rgba(255,255,255,0.18) 100%);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .content-wrap {
@@ -76,18 +72,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 1;
 }
 
-/* ===== PAGE 1: COVER - Height matches image (portrait ~3:4) ===== */
+/* ===== PAGE 1: COVER ===== */
 .cover {
   position: relative;
   width: 100%;
-  /* Match the portrait image aspect ratio */
-  aspect-ratio: 3 / 4;
-  max-height: 100vh;
-  max-height: 100svh;
+  height: 100svh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 0 24px;
-  color: var(--ink);
+  color: var(--white);
   overflow: hidden;
 }
 
@@ -100,11 +94,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .cover-eyebrow {
   font-family: var(--sans);
-  font-size: clamp(10px, 2.5vw, 13px);
+  font-size: clamp(10px, 2.5vw, 12px);
   letter-spacing: 6px;
   font-weight: 400;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--white);
 }
 
 @keyframes fadeUp {
@@ -120,7 +114,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 20px 0;
 }
 
-/* ===== LARGE STACKED DATE (left side) ===== */
 .date-stacked {
   display: flex;
   flex-direction: column;
@@ -132,7 +125,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .date-stacked .d-num {
   font-family: var(--serif-display);
   font-weight: 400;
-  color: var(--ink);
+  color: var(--white);
   line-height: 0.88;
   transform: translateX(-100%);
   opacity: 0;
@@ -161,38 +154,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   100% { transform: translateX(0); opacity: 1; }
 }
 
-/* ===== BODONI 72 AMPERSAND ===== */
 .ampersand-bodoni {
   position: absolute;
-  right: clamp(-30px, 0vw, 20px);
-  top: 50%;
-  transform: translateY(-50%) scale(0.7);
-  /* Bodoni 72 font - high contrast Didone style */
+  right: clamp(0px, 4vw, 40px);
+  bottom: 15%;
+  transform: translateY(20%);
   font-family: var(--bodoni);
   font-style: italic;
   font-weight: 400;
-  color: var(--gray-white);
-  font-size: clamp(240px, 65vw, 450px);
+  color: rgba(255, 255, 255, 0.2);
+  font-size: clamp(120px, 30vw, 200px);
   line-height: 0.7;
   z-index: 1;
   opacity: 0;
   animation: ampReveal 2s cubic-bezier(0.2, 0.7, 0.2, 1) 1.7s forwards;
   pointer-events: none;
-  letter-spacing: -12px;
+  letter-spacing: -8px;
 }
 
 @keyframes ampReveal {
-  to { opacity: 1; transform: translateY(-50%) scale(1); }
+  to { opacity: 1; transform: translateY(20%); }
 }
 
-/* ===== NAMES ON THE AMPERSAND ===== */
 .names-on-amp {
   position: absolute;
-  right: clamp(15px, 7vw, 70px);
-  top: 58%;
-  transform: translateY(-50%);
+  right: clamp(0px, 4vw, 40px);
+  bottom: 15%;
+  transform: translateY(20%);
+  width: clamp(120px, 30vw, 200px);
   z-index: 3;
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
   opacity: 0;
   animation: namesReveal 1.4s ease 2.3s forwards;
 }
@@ -202,25 +196,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .names-on-amp .name-line {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 400;
-  font-style: normal;
-  color: var(--ink);
-  line-height: 1.05;
-  display: block;
-  letter-spacing: 0;
-  text-transform: none;
-  font-size: clamp(32px, 8vw, 56px);
+  font-family: 'Bodoni Moda', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.1;
+  font-size: clamp(28px, 7vw, 48px);
+  letter-spacing: -1px;
+  text-align: right;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .names-on-amp .name-line:first-child {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  margin-right: 35px; 
 }
 
-/* ===== SCROLL ARROW AT BOTTOM ===== */
 .scroll-arrow {
   position: absolute;
-  bottom: clamp(15px, 3vh, 35px);
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
@@ -237,14 +231,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: transform 0.3s ease;
 }
 
-.scroll-arrow:hover {
-  transform: translateX(-50%) translateY(4px);
-}
+.scroll-arrow:hover { transform: translateX(-50%) translateY(4px); }
 
 .scroll-arrow svg {
-  width: 26px;
-  height: 26px;
-  stroke: var(--ink);
+  width: 28px;
+  height: 28px;
+  stroke: var(--white);
   stroke-width: 1.5;
   fill: none;
   animation: arrowBounce 2s ease-in-out infinite;
@@ -255,257 +247,235 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   50% { transform: translateY(6px); }
 }
 
-@keyframes arrowReveal {
-  to { opacity: 0.75; }
-}
+@keyframes arrowReveal { to { opacity: 0.8; } }
+.scroll-arrow:hover svg { opacity: 1; stroke-width: 2; }
 
-.scroll-arrow:hover svg {
-  opacity: 1;
-  stroke-width: 2;
-}
-
-/* ===== OTHER PAGES ===== */
-.seamless-section {
-  padding: clamp(80px, 15vh, 140px) 24px;
-  max-width: 700px;
-  margin: 0 auto;
-  color: var(--ink);
+/* ===== PAGE 2: LOVE STORY - CINEMATIC SLIDE-IN ANIMATIONS ===== */
+.love-story-cinematic {
   position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(80px, 15vh, 120px) 0;
+  overflow: hidden; /* Prevents horizontal scroll during animation */
 }
 
-.section-overline {
-  display: block;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: 4px;
-  color: var(--ink);
-  opacity: 0.6;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.love-story-header {
+.love-story-heading {
+  position: relative;
+  z-index: 3;
   text-align: center;
   margin-bottom: 60px;
-  padding-top: clamp(40px, 8vh, 80px);
 }
 
-.love-story-header h2 {
+.love-story-heading h2 {
   font-family: var(--serif-display);
   font-weight: 300;
-  font-style: normal;
-  font-size: clamp(36px, 10vw, 70px);
+  font-size: clamp(36px, 9vw, 64px);
   line-height: 1;
-  color: var(--gray-white);
-  letter-spacing: 6px;
+  color: var(--white);
+  letter-spacing: clamp(6px, 2vw, 14px);
   text-transform: uppercase;
-  white-space: nowrap;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.love-story-header h2.visible {
+.love-story-heading.visible h2 {
   opacity: 1;
   transform: translateY(0);
 }
 
-.photo-reveal-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+.love-story-line {
+  width: 1px;
+  height: 0;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 30px auto;
+  transition: height 1.5s ease 0.5s;
 }
 
-.photo-reveal-item {
+.love-story-heading.visible .love-story-line {
+  height: clamp(50px, 10vh, 80px);
+}
+
+/* Collage container */
+.love-story-collage {
   position: relative;
-  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  min-height: 850px; /* Ensures enough height for absolute positioning on desktop */
+  z-index: 2;
+}
+
+/* First image - top-left (slides in from LEFT) */
+.love-image-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  max-width: 500px;
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1.4s ease, transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform: translateX(-100vw);
+  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Clean and elegant: no shadows, borders, or rounded corners */
 }
 
-.photo-reveal-item.visible {
+.love-image-1.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
-.photo-reveal-item img {
+.love-image-1 img {
   width: 100%;
   height: auto;
+  display: block;
+  aspect-ratio: 3/4;
   object-fit: cover;
-  transition: transform 2s ease;
 }
 
-.photo-reveal-item.visible img {
-  transform: scale(1.03);
+/* Second image - bottom-right cascade (slides in from RIGHT) */
+.love-image-2 {
+  position: absolute;
+  top: 40%; /* Aligns top-left area near the bottom-right of the first image */
+  right: 0;
+  width: 50%;
+  max-width: 450px;
+  opacity: 0;
+  transform: translateX(100vw);
+  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.35s,
+              transform 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.35s;
+  /* Clean and elegant: no shadows, borders, or rounded corners */
 }
 
-.photo-reveal-item:first-child {
-  max-width: 90%;
-  align-self: flex-start;
+.love-image-2.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.photo-reveal-item:last-child {
-  max-width: 80%;
-  align-self: flex-end;
+.love-image-2 img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 3/4;
+  object-fit: cover;
 }
 
-.photo-caption {
+/* ===== OTHER SECTIONS ===== */
+.seamless-section, .rsvp-section, .footer {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: clamp(60px, 10vh, 100px) 24px;
   text-align: center;
-  font-family: var(--serif);
-  font-size: 16px;
-  font-style: italic;
-  color: var(--ink);
-  opacity: 0.7;
-  margin-top: 50px;
-  letter-spacing: 1px;
-}
-
-.invitation-text {
-  text-align: center;
+  color: var(--white);
 }
 
 .invitation-text .greeting {
   font-family: var(--serif-display);
-  font-size: clamp(26px, 6.5vw, 38px);
+  font-size: clamp(28px, 7vw, 42px);
   font-weight: 400;
-  color: var(--ink);
+  font-style: italic;
+  color: var(--white);
   margin-bottom: 30px;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 2s ease, transform 2s ease;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
-.invitation-text .greeting.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.invitation-text .greeting.visible { opacity: 1; transform: translateY(0); }
 
 .invitation-text .message {
   font-family: var(--serif);
-  font-size: clamp(18px, 4.5vw, 24px);
+  font-size: clamp(18px, 4.5vw, 22px);
   font-weight: 400;
-  line-height: 1.9;
-  color: var(--ink);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1.2s ease 0.3s, transform 1.2s ease 0.3s;
+  transition: opacity 2s ease 0.3s, transform 2s ease 0.3s;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
-.invitation-text .message.visible {
-  opacity: 0.85;
-  transform: translateY(0);
-}
-
-.final-date {
-  text-align: center;
-}
+.invitation-text .message.visible { opacity: 1; transform: translateY(0); }
 
 .final-date .waiting-text {
   font-family: var(--serif-display);
-  font-size: clamp(28px, 7vw, 44px);
+  font-size: clamp(24px, 6vw, 36px);
   font-weight: 400;
-  line-height: 1.4;
-  color: var(--ink);
-  margin-bottom: 60px;
+  font-style: italic;
+  color: var(--white);
+  margin-bottom: 50px;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 2s ease, transform 2s ease;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
-.final-date .waiting-text.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.final-date .waiting-text.visible { opacity: 1; transform: translateY(0); }
 
 .final-date-large {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-left: clamp(10px, 4vw, 40px);
+  align-items: center;
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 1.4s ease, transform 1.4s ease;
+  transition: opacity 2.5s ease, transform 2.5s ease;
 }
 
-.final-date-large.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.final-date-large.visible { opacity: 1; transform: translateY(0); }
 
 .final-date-large .fd-num {
   font-family: var(--serif-display);
   font-weight: 400;
-  color: var(--ink);
+  color: var(--white);
   line-height: 0.88;
   letter-spacing: -2px;
   transform: translateX(-80px);
   opacity: 0;
-  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 1.2s ease;
+  transition: transform 2s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 2s ease;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.final-date-large.visible .fd-num.fd1 {
-  font-size: clamp(110px, 30vw, 220px);
-  transform: translateX(0);
-  opacity: 1;
-  transition-delay: 0.2s;
-}
-
-.final-date-large.visible .fd-num.fd2 {
-  font-size: clamp(100px, 27vw, 200px);
-  transform: translateX(0);
-  opacity: 1;
-  transition-delay: 0.5s;
-}
-
-.final-date-large.visible .fd-num.fd3 {
-  font-size: clamp(90px, 24vw, 180px);
-  transform: translateX(0);
-  opacity: 1;
-  transition-delay: 0.8s;
-}
+.final-date-large.visible .fd-num.fd1 { font-size: clamp(110px, 30vw, 220px); transform: translateX(0); opacity: 1; transition-delay: 0.2s; }
+.final-date-large.visible .fd-num.fd2 { font-size: clamp(100px, 27vw, 200px); transform: translateX(0); opacity: 1; transition-delay: 0.5s; margin-left: clamp(20px, 6vw, 50px); }
+.final-date-large.visible .fd-num.fd3 { font-size: clamp(90px, 24vw, 180px); transform: translateX(0); opacity: 1; transition-delay: 0.8s; }
 
 /* ===== RSVP SECTION ===== */
 .rsvp-section {
-  padding: clamp(80px, 15vh, 140px) 24px;
   max-width: 540px;
-  margin: 0 auto;
-  color: var(--ink);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .rsvp-section h2 {
   font-family: var(--serif-display);
   font-size: clamp(32px, 8vw, 46px);
   font-weight: 400;
-  text-align: center;
+  font-style: italic;
   margin-bottom: 10px;
-  color: var(--ink);
+  color: var(--white);
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
 .rsvp-text {
-  text-align: center;
-  font-size: 13px;
-  color: var(--ink);
-  opacity: 0.7;
-  margin-bottom: 50px;
-  line-height: 1.8;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  line-height: 1.6;
 }
 
-.rsvp-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 28px;
-}
+.rsvp-form { display: flex; flex-direction: column; text-align: left; }
+.form-group { margin-bottom: 28px; }
 
 .form-group label {
   display: block;
   font-size: 11px;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   margin-bottom: 10px;
-  color: var(--ink);
+  color: var(--white);
   font-weight: 500;
 }
 
@@ -513,81 +483,44 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   width: 100%;
   padding: 12px 0;
   border: 0;
-  border-bottom: 1px solid rgba(26,23,20,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
   background: transparent;
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--white);
   transition: border-color 0.3s ease;
   outline: none;
 }
 
-.form-input:focus {
-  border-bottom-color: var(--ink);
-}
+.form-input:focus { border-bottom-color: var(--white); }
+.form-input::placeholder { color: var(--white); opacity: 0.4; font-size: 15px; font-style: italic; }
+.form-input.error { border-bottom-color: var(--accent); }
 
-.form-input::placeholder {
-  color: var(--ink);
-  opacity: 0.4;
-  font-size: 13px;
-}
+.error-message { font-size: 11px; color: #ff6b6b; margin-top: 6px; display: none; }
+.error-message.show { display: block; }
 
-.form-input.error {
-  border-bottom-color: var(--accent);
-}
-
-.error-message {
-  font-size: 11px;
-  color: var(--accent);
-  margin-top: 6px;
-  display: none;
-}
-
-.error-message.show {
-  display: block;
-}
-
-.form-fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0 0 30px;
-}
-
-.form-fieldset legend {
-  font-size: 11px;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  color: var(--ink);
-  font-weight: 500;
-}
-
-.radio-group {
-  display: flex;
-  flex-direction: column;
-}
+.form-fieldset { border: 0; padding: 0; margin: 0 0 30px; }
+.form-fieldset legend { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px; color: var(--white); font-weight: 500; }
+.radio-group { display: flex; flex-direction: column; }
 
 .radio-option {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(26,23,20,0.15);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   cursor: pointer;
   transition: background 0.2s ease;
-  font-size: 13px;
-  color: var(--ink);
-}
-
-.radio-option:hover {
-  background: rgba(26,23,20,0.03);
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--white);
 }
 
 .radio-option input[type="radio"] {
   appearance: none;
-  -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  border: 1.5px solid rgba(26,23,20,0.4);
+  border: 1.5px solid rgba(255,255,255,0.4);
   border-radius: 50%;
   position: relative;
   cursor: pointer;
@@ -595,211 +528,126 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   flex-shrink: 0;
 }
 
-.radio-option input[type="radio"]:checked {
-  border-color: var(--ink);
-}
-
+.radio-option input[type="radio"]:checked { border-color: var(--white); }
 .radio-option input[type="radio"]:checked::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
+  width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--ink);
-  animation: radioCheck 0.3s ease;
-}
-
-@keyframes radioCheck {
-  0% { transform: translate(-50%, -50%) scale(0); }
-  50% { transform: translate(-50%, -50%) scale(1.3); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-.radio-option input[type="radio"]:focus {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
+  background: var(--white);
 }
 
 .guests-select {
   display: none;
   margin-top: 15px;
   padding: 15px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 8px;
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
   animation: slideDown 0.3s ease;
 }
+.guests-select.show { display: block; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-.guests-select.show {
-  display: block;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.guests-select label {
-  font-size: 11px;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  display: block;
-  color: var(--ink);
-}
-
+.guests-select label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; display: block; }
 .guests-select select {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid rgba(26,23,20,0.2);
-  border-radius: 6px;
-  background: rgba(255,255,255,0.7);
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  background: rgba(0,0,0,0.5);
   font-family: var(--sans);
-  font-size: 13px;
-  color: var(--ink);
+  font-size: 14px;
+  color: var(--white);
   outline: none;
-  cursor: pointer;
-}
-
-.guests-select select:focus {
-  border-color: var(--ink);
 }
 
 .submit-btn {
   width: 100%;
   padding: 18px;
-  border: 1.5px solid var(--ink);
+  border: 1px solid var(--white);
   background: transparent;
-  color: var(--ink);
+  color: var(--white);
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 3px;
+  text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .submit-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--ink);
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--white);
   transition: left 0.4s ease;
   z-index: 0;
 }
 
-.submit-btn:hover::before {
-  left: 0;
-}
-
-.submit-btn:hover {
-  color: var(--white);
-}
-
-.submit-btn span {
-  position: relative;
-  z-index: 1;
-}
-
-.submit-btn:active {
-  transform: scale(0.98);
-}
-
-.submit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.submit-btn:disabled::before {
-  display: none;
-}
+.submit-btn:hover::before { left: 0; }
+.submit-btn:hover { color: var(--black); }
+.submit-btn span { position: relative; z-index: 1; }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.submit-btn:disabled::before { display: none; }
 
 .rsvp-message {
   margin-top: 25px;
   padding: 20px;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 4px;
+  font-size: 14px;
   text-align: center;
   display: none;
   animation: messageIn 0.5s ease;
-  backdrop-filter: blur(8px);
 }
+@keyframes messageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.rsvp-message.success { display: block; background: rgba(255,255,255,0.15); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+.rsvp-message.error { display: block; background: rgba(255,107,107,0.2); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3); }
 
-@keyframes messageIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.rsvp-message.success {
-  display: block;
-  background: rgba(255,255,255,0.7);
-  color: var(--ink);
-  border: 1px solid rgba(26,23,20,0.2);
-}
-
-.rsvp-message.error {
-  display: block;
-  background: rgba(184,92,79,0.15);
-  color: var(--accent);
-  border: 1px solid rgba(184,92,79,0.3);
-}
-
-.rsvp-message .check-icon {
-  font-size: 24px;
-  display: block;
-  margin-bottom: 8px;
-}
-
+/* ===== FOOTER ===== */
 .footer {
-  padding: 60px 24px 80px;
+  padding: 80px 24px 100px;
   text-align: center;
-  color: var(--ink);
-}
-
-.footer > span:first-child {
-  font-size: 9px;
-  letter-spacing: 5px;
-  color: var(--ink);
-  opacity: 0.6;
+  color: var(--white);
+  background: transparent;
 }
 
 .footer h2 {
   font-family: var(--serif-display);
   font-size: clamp(36px, 9vw, 54px);
   font-weight: 400;
-  margin: 20px 0 8px;
-  color: var(--ink);
-}
-
-.footer h2 i {
   font-style: italic;
-  color: var(--ink);
+  margin: 20px 0 8px;
+  color: var(--white);
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
 .footer p {
+  font-family: var(--sans);
   font-size: 11px;
-  letter-spacing: 5px;
-  color: var(--ink);
+  letter-spacing: 4px;
+  color: var(--white);
   opacity: 0.7;
+  text-transform: uppercase;
 }
 
 .footer-tagline {
   display: block;
   margin-top: 35px;
-  font-size: 8px;
-  letter-spacing: 3px;
-  color: var(--ink);
-  opacity: 0.5;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
+/* ===== FLOATING BUTTONS ===== */
 .floating-btns {
   position: fixed;
   z-index: 90;
@@ -812,41 +660,33 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .floating-btn {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
   font-size: 10px;
   font-weight: 500;
   color: var(--white);
   backdrop-filter: blur(8px);
+  border: none;
 }
 
-.floating-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
-}
+.floating-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+.floating-btn.faq-btn { background: rgba(255, 107, 107, 0.9); font-size: 14px; font-weight: 600; }
+.floating-btn.chat-btn { background: rgba(74, 222, 128, 0.9); font-size: 20px; }
 
-.floating-btn.faq-btn {
-  background: rgba(184,92,79,0.9);
-}
-
-.floating-btn.rsvp-float-btn {
-  background: rgba(45,138,94,0.9);
-  font-size: 18px;
-}
-
+/* ===== MODAL ===== */
 .modal-overlay {
   display: none;
   position: fixed;
   z-index: 200;
   inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -854,132 +694,110 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: opacity 0.3s ease;
 }
 
-.modal-overlay.open {
-  display: flex;
-  opacity: 1;
-}
+.modal-overlay.open { display: flex; opacity: 1; }
 
 .modal-box {
   position: relative;
-  background: rgba(245,240,235,0.97);
+  background: rgba(0, 0, 0, 0.9);
   width: 100%;
   max-width: 440px;
   max-height: 85vh;
   overflow-y: auto;
-  padding: 40px 28px;
-  border-radius: 12px;
+  padding: 40px 32px;
+  border-radius: 8px;
   transform: translateY(20px);
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  color: var(--ink);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.modal-overlay.open .modal-box {
-  transform: translateY(0);
-}
+.modal-overlay.open .modal-box { transform: translateY(0); }
 
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 28px;
-  color: var(--ink);
-  opacity: 0.6;
+  top: 16px; right: 16px;
+  font-size: 24px;
+  color: var(--white);
+  opacity: 0.5;
   transition: all 0.2s;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
 }
-
-.modal-close:hover {
-  opacity: 1;
-  background: rgba(0,0,0,0.05);
-}
-
-.modal-box .section-overline {
-  text-align: left;
-  color: var(--ink);
-  opacity: 0.6;
-}
+.modal-close:hover { opacity: 1; background: rgba(255,255,255,0.1); }
 
 .modal-box h2 {
   font-family: var(--serif-display);
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 400;
-  margin: 12px 0 28px;
-  line-height: 1.4;
-  color: var(--ink);
+  font-style: italic;
+  margin: 12px 0 32px;
+  color: var(--white);
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.faq-item {
-  padding: 16px 0;
-  border-top: 1px solid rgba(26,23,20,0.15);
-}
-
+.faq-item { padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.1); }
 .faq-item summary {
   cursor: pointer;
-  font-size: 13px;
+  font-family: var(--serif);
+  font-size: 16px;
   font-weight: 500;
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  color: var(--ink);
+  color: var(--white);
 }
-
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-item summary::after {
-  content: '+';
-  font-size: 18px;
-  color: var(--ink);
-  opacity: 0.5;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.faq-item[open] summary::after {
-  transform: rotate(45deg);
-}
-
-.faq-item p {
-  font-size: 13px;
-  color: var(--ink);
-  opacity: 0.7;
-  margin-top: 12px;
-  line-height: 1.7;
-}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 20px; opacity: 0.5; transition: transform 0.3s ease; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { font-family: var(--sans); font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 12px; line-height: 1.7; }
 
 @media (min-width: 700px) {
-  .seamless-section { padding: 160px 32px; }
-  .rsvp-section { padding: 160px 32px; }
+  .seamless-section, .rsvp-section { padding: 100px 40px; }
 }
 
-@media (max-width: 480px) {
-  .photo-reveal-item:first-child,
-  .photo-reveal-item:last-child {
+@media (max-width: 768px) {
+  .love-story-collage {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 20px;
+  }
+  
+  .love-image-1,
+  .love-image-2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
     max-width: 100%;
-    align-self: center;
+    /* On mobile, slide from top/bottom to prevent horizontal scroll issues */
+    transform: translateY(40px);
   }
-  .names-on-amp {
-    right: 5px;
-    top: 60%;
+  
+  .love-image-1.visible,
+  .love-image-2.visible {
+    transform: translateY(0);
   }
-  .ampersand-bodoni {
-    right: -20px;
-    font-size: clamp(200px, 58vw, 340px);
+  
+  .love-image-2 {
+    transition-delay: 0.2s;
   }
-  .love-story-header h2 {
-    white-space: normal;
-    font-size: clamp(28px, 9vw, 50px);
-    letter-spacing: 4px;
+  
+  .love-image-1 img,
+  .love-image-2 img {
+    aspect-ratio: 4/5;
   }
+  
+  .names-on-amp { right: 10px; bottom: 15%; width: clamp(100px, 26vw, 160px); }
+  .names-on-amp .name-line { font-size: clamp(22px, 6vw, 36px); }
+  .names-on-amp .name-line:first-child { margin-right: 20px; }
+  .ampersand-bodoni { right: -10px; bottom: 10%; font-size: clamp(100px, 26vw, 160px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -988,27 +806,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .photo-reveal-item,
-  .invitation-text .greeting,
-  .invitation-text .message,
-  .final-date .waiting-text,
-  .final-date-large,
-  .final-date-large .fd-num,
-  .date-stacked .d-num,
-  .names-on-amp,
-  .ampersand-bodoni,
-  .love-story-header h2 {
+  .love-image-1,
+  .love-image-2,
+  .love-story-heading h2,
+  .love-story-line,
+  .invitation-text .greeting, .invitation-text .message,
+  .final-date .waiting-text, .final-date-large, .final-date-large .fd-num,
+  .date-stacked .d-num, .names-on-amp, .ampersand-bodoni {
     opacity: 1;
     transform: none;
   }
+  .love-story-line { height: clamp(50px, 10vh, 80px); }
 }
 </style>
 </head>
 <body>
 
-<!-- FIXED BACKGROUND PHOTO -->
+<!-- FIXED GLOBAL BACKGROUND (Same for all pages) -->
 <div class="fixed-bg">
-  <img src="https://cdn.shopify.com/s/files/1/0771/6290/5791/files/photo_2026-10-16_23-00-43.jpg?v=1792178285" alt="Vardan and Lilit">
+  <img src="https://cdn.shopify.com/s/files/1/0771/6290/5791/files/photo_2026-10-16_23-00-43.jpg?v=1792178285" alt="Vardan and Lilit Background">
 </div>
 
 <div class="content-wrap" id="vl-wedding">
@@ -1020,24 +836,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </div>
 
     <div class="cover-middle">
-      <!-- LARGE STACKED DATE (left) with 04 offset to right -->
       <div class="date-stacked" aria-label="17 April 2027">
         <span class="d-num d1">17</span>
         <span class="d-num d2">04</span>
         <span class="d-num d3">27</span>
       </div>
 
-      <!-- BODONI 72 AMPERSAND -->
       <div class="ampersand-bodoni" aria-hidden="true">&</div>
 
-      <!-- NAMES ON THE AMPERSAND -->
       <div class="names-on-amp">
         <span class="name-line">Vardan</span>
         <span class="name-line">Lilit</span>
       </div>
     </div>
 
-    <!-- SCROLL ARROW AT BOTTOM - Click to open next pages -->
     <button class="scroll-arrow" id="scrollDown" aria-label="Scroll to invitation">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1045,22 +857,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </button>
   </section>
 
-  <!-- ===== PAGE 2: LOVE STORY ===== -->
-  <section class="seamless-section" id="love-story">
-    <div class="love-story-header">
-      <h2 data-reveal-title>Love Story</h2>
+  <!-- ===== PAGE 2: LOVE STORY - CINEMATIC SLIDE-IN ===== -->
+  <section class="love-story-cinematic" id="love-story">
+    
+    <div class="love-story-heading" data-reveal>
+      <h2>Love Story</h2>
+      <div class="love-story-line"></div>
     </div>
 
-    <div class="photo-reveal-container">
-      <div class="photo-reveal-item" data-reveal>
-        <img src="https://cdn.shopify.com/s/files/1/0771/6290/5791/files/photo_2026-10-16_21-23-31.jpg?v=1792171735" alt="Holding hands">
+    <div class="love-story-collage">
+      <!-- First image - slides in from LEFT -->
+      <div class="love-image-1" data-reveal>
+        <img src="https://cdn.shopify.com/s/files/1/0771/6290/5791/files/photo_2026-10-16_21-23-32.jpg?v=1792171735" alt="Vardan and Lilit">
       </div>
-      <div class="photo-reveal-item" data-reveal>
-        <img src="https://cdn.shopify.com/s/files/1/0771/6290/5791/files/photo_2026-10-16_21-23-33.jpg?v=1792171735" alt="Walking together">
+      
+      <!-- Second image - slides in from RIGHT, cascading to bottom-right -->
+      <div class="love-image-2" data-reveal>
+        <img src="https://cdn.shopify.com/s/files/1/0771/6290/5791/files/photo_2026-10-16_21-23-33_2.jpg?v=1792171735" alt="Vardan and Lilit">
       </div>
     </div>
 
-    <p class="photo-caption">Մեր պատմությունը շարունակվում է...</p>
   </section>
 
   <!-- ===== PAGE 3: INVITATION TEXT ===== -->
@@ -1114,7 +930,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
             <span>Ցավոք, չեմ կարող մասնակցել</span>
           </label>
         </div>
-        <div class="error-message" id="attendanceError">նդրում ենք ընտրել մեկ տարբերակ</div>
+        <div class="error-message" id="attendanceError">Խնդրում ենք ընտրել մեկ տարբերակ</div>
       </fieldset>
 
       <div class="guests-select" id="guestsSelect">
@@ -1134,7 +950,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
 
       <button class="submit-btn" type="submit" id="submitBtn">
-        <span>ՀԱՍՏԱՏԼ ՆԵՐԿԱՅՈՒԹՈՒՆԸ ↗</span>
+        <span>Հաստատել Ներկայությունը</span>
       </button>
 
       <div class="rsvp-message" id="rsvpMessage" role="status" aria-live="polite"></div>
@@ -1143,33 +959,31 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <span>WITH LOVE</span>
-    <h2>Vardan <i>&</i> Lilit</h2>
+    <h2>Vardan & Lilit</h2>
     <p>17 · 04 · 2027</p>
-    <span class="footer-tagline">ՄԵԿ ՕՐ · ՄԵԿ ՊԱՏՄՈՒԹՅՈՒՆ · ՄԵ ՍԵՐ</span>
+    <span class="footer-tagline">Մեկ օր · Մեկ պատմություն · Մեկ սեր</span>
   </footer>
 
   <!-- ===== FLOATING BUTTONS ===== -->
   <div class="floating-btns">
     <button type="button" class="floating-btn faq-btn" id="faqOpen" aria-label="FAQ">FAQ</button>
-    <a href="#rsvp" class="floating-btn rsvp-float-btn" aria-label="RSVP">↗</a>
+    <button type="button" class="floating-btn chat-btn" aria-label="Chat">💬</button>
   </div>
 
   <!-- ===== FAQ MODAL ===== -->
   <div class="modal-overlay" id="faqModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="faqTitle">
     <div class="modal-box">
       <button type="button" class="modal-close" id="faqClose" aria-label="Close">×</button>
-      <span class="section-overline">Good to Know</span>
       <h2 id="faqTitle">Հաճախ տրվող հարցեր</h2>
 
       <details class="faq-item">
         <summary>Երբ է հարսանիքը</summary>
-        <p>2027 վականի ապրիլի 17-ին։</p>
+        <p>2027 թվականի ապրիլի 17-ին։</p>
       </details>
 
       <details class="faq-item">
         <summary>Որտե՞ղ է հարսի տունը</summary>
-        <p>ք. Մասիս, րևանյան 2, ժամը 12:00-ին։</p>
+        <p>ք. Մասիս, Երևանյան 2, ժամը 12:00-ին։</p>
       </details>
 
       <details class="faq-item">
@@ -1183,7 +997,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </details>
 
       <details class="faq-item">
-        <summary>Ի՞նչ հագնել</summary>
+        <summary>Ինչ հագնել</summary>
         <p>Խնդրում ենք ընտրել պաշտոնական հագուստ։ Կանանց համար երկար զգեստ, տղամարդկանց համար՝ կոստյում։</p>
       </details>
 
@@ -1204,7 +1018,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   if (!root || root.dataset.init === '1') return;
   root.dataset.init = '1';
 
-  // ===== SCROLL ARROW - Click to open next pages =====
+  // ===== SCROLL ARROW =====
   const scrollDownBtn = root.querySelector('#scrollDown');
   const loveStorySection = root.querySelector('#love-story');
 
@@ -1215,7 +1029,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     });
   }
 
-  // ===== SCROLL REVEAL =====
+  // ===== SCROLL REVEAL ANIMATIONS =====
   const revealItems = root.querySelectorAll('[data-reveal]');
   
   if ('IntersectionObserver' in window) {
@@ -1226,26 +1040,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
     revealItems.forEach(item => revealObserver.observe(item));
-
-    const loveTitle = root.querySelector('[data-reveal-title]');
-    if (loveTitle) {
-      const titleObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            titleObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-      titleObserver.observe(loveTitle);
-    }
   } else {
     revealItems.forEach(item => item.classList.add('visible'));
-    const loveTitle = root.querySelector('[data-reveal-title]');
-    if (loveTitle) loveTitle.classList.add('visible');
   }
 
   // ===== RSVP FORM =====
@@ -1299,13 +1098,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
     if (!valid) {
       rsvpMessage.className = 'rsvp-message error';
-      rsvpMessage.innerHTML = '<span class="check-icon">⚠</span>Խնդրում ենք լրացնել բոլոր պարտադիր դաշտերը։';
+      // Fixed typo: Added missing "Խ" to "Խնդրում ենք"
+      rsvpMessage.innerHTML = '<span style="font-size:20px;display:block;margin-bottom:8px;">⚠</span>Խնդրում ենք լրացնել բոլոր պարտադիր դաշտերը։';
       rsvpMessage.style.display = 'block';
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.querySelector('span').textContent = 'ՈՒՂԱՐԿՈՒՄ ...';
+    submitBtn.querySelector('span').textContent = 'Ուղարկում ...';
 
     setTimeout(() => {
       const guestCount = guestsSelect.classList.contains('show')
@@ -1317,24 +1117,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       if (isAttending) {
         rsvpMessage.className = 'rsvp-message success';
         rsvpMessage.innerHTML =
-          '<span class="check-icon">✓</span>' +
+          '<span style="font-size:24px;display:block;margin-bottom:8px;">✓</span>' +
           'Շնորհակալություն, <strong>' + name + '</strong>!<br>' +
           'Ձեր ներկայությունը հաստատված է' +
           (guestCount > 1 ? ' (' + guestCount + ' հոգի)' : '') +
-          '։<br><small style="opacity:0.7;margin-top:8px;display:block;">Սպասում ենք Ձեզ 17.04.2027-ին ♡</small>';
+          '։<br><small style="opacity:0.7;margin-top:12px;display:block;">Սպասում ենք Ձեզ 17.04.2027-ին ♡</small>';
       } else {
         rsvpMessage.className = 'rsvp-message success';
-        rsvpMessage.style.background = 'rgba(245,240,235,0.8)';
+        // Fixed typo: Changed "եր սերը" to "Ձեր սերը"
         rsvpMessage.innerHTML =
-          '<span class="check-icon">♡</span>' +
-          'նորհակալություն, <strong>' + name + '</strong>!<br>' +
+          '<span style="font-size:24px;display:block;margin-bottom:8px;">♡</span>' +
+          'Շնորհակալություն, <strong>' + name + '</strong>!<br>' +
           'Ցավում ենք, որ չեք կարողանա միանալ մեզ։<br>' +
-          '<small style="opacity:0.7;margin-top:8px;display:block;">Ձեր սերը միշտ մեզ հետ է ♡</small>';
+          '<small style="opacity:0.7;margin-top:12px;display:block;">Ձեր սերը միշտ մեզ հետ է ♡</small>';
       }
 
       rsvpMessage.style.display = 'block';
       submitBtn.disabled = false;
-      submitBtn.querySelector('span').textContent = 'ՀԱՍՏԱՏԵԼ ՆԵՐԿԱՅՒԹՅՈՆԸ ↗';
+      submitBtn.querySelector('span').textContent = 'Հաստատել Ներկայությունը';
 
       rsvpMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 1200);
